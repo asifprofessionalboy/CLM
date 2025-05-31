@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "ForgotPassword";
+}
+
+
+<div class="container-fluid">
+    <div class="card m-2 shadow-lg">
+        <div class="card-header bg-info text-light">
+            <h6 class="m-0">User Authorization</h6>
+        </div>
+        <div class="card-body pt-1">
+
+            <fieldset class="" style="border:1px solid #bfbebe;padding:5px 20px 5px 20px;border-radius:6px">
+                <legend style="width:auto;border:0;font-size:14px;margin:0px 6px 0px 6px;padding:0px 5px 0px 5px;color:#0000FF"><b>User Information</b></legend>
+
+                <div class="form-inline row">
+                    <div class="form-group col-md-5 mb-1">
+                        <label for="user" class="m-0 mr-2 col-form-label-sm font-weight-bold">Select User:</label>
+
+
+                        <input name="VCODE" type="text" value="" onchange= class="form-control form-control-sm" style="width:325px;" autocomplete="off">
+
+
+
+
+
+
+
+                    </div>
+
+                    <div class="form-group col-md-5 mb-1">
+                        <label for="PasswordQuestion" class="m-0 mr-2 col-form-label-sm font-weight-bold">User Name:</label>
+                        <input name="VNAME" type="text"  disabled="disabled" class="aspNetDisabled form-control form-control-sm" style="width:195px;">
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <form asp-controller="User" asp-action="UserPermission">
+                <fieldset class="" style="border: 1px solid #bfbebe; padding: 5px 20px 5px 20px; border-radius: 6px; overflow: auto">
+                    <legend style="width: auto; border: 0; font-size: 14px; margin: 0px 6px 0px 6px; padding: 0px 5px 0px 5px; color: #0000FF"><b>Select Permission for the User</b></legend>
+                    <div class="w-100 border" style="overflow: auto;">
+
+                        <div>
+                            <table cellspacing="0" cellpadding="4" id="recordsTable" style="color:#333333;width:100%;border-collapse:collapse;">
+                                <tbody>
+                                    <tr style="color:White;background-color:#5D7B9D;font-size:Smaller;font-weight:bold;">
+                                        <th align="left" scope="col">Form Name</th>
+                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">&nbsp;</th>
+                                        <th scope="col">&nbsp;</th>
+                                    </tr>
+
+                              
+                                        <tr style="color:#284775;background-color:White;font-size:Smaller;">
+                                            <td>
+                                                <span id=""></span>
+                                            </td>
+                                            <td style="width:100px;">
+                                                <input id="" type="checkbox" name=""><label for="">Read</label>
+                                            </td>
+                                            <td style="width:100px;">
+                                                <input id="" type="checkbox" name=""><label for="">Create</label>
+                                            </td>
+                                            <td style="width:100px;">
+                                                <input id="" type="checkbox" name=""><label for="">Modify</label>
+                                            </td>
+                                            <td style="width:100px;">
+                                                <input id="" type="checkbox" name=""><label for="">Delete</label>
+                                            </td>
+                                            <td style="width:100px;">
+                                                <input id="" type="checkbox" name=""><label for="">All</label>
+                                            </td>
+                                        </tr>
+
+                                    <tr style="color:#333333;background-color:#F7F6F3;font-size:Smaller;">
+                                        <td>
+                                            <span id="">VendorMaster</span>
+                                        </td>
+
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

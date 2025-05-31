@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+
+<div  class="mt-4">
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-info">@ViewBag.Message</div>
+    }
+</div>
+
+
+
+
+
+
+<div class="container-fluid">
+    <div class="card m-2 shadow-lg">
+        <div class="card-header bg-info text-light">
+            <h6 class="m-0">Register</h6>
+        </div>
+        <div class="card-body pt-1">
+            <form asp-action="Register" method="post">
+                <fieldset style="border:1px solid #bfbebe;padding:5px 20px 5px 20px;border-radius:6px">
+                    <legend style="width:auto;border:0;font-size:14px;margin:0px 6px 0px 6px;padding:0px 5px 0px 5px;color:#0000FF">
+                        <b>Register for User</b>
+                    </legend>
+                  
+                   
+                    
+                    
+                    <div class="form-inline row">
+                        <div class="form-group col-md-6 mb-1">
+                            <label for="username" class="m-0 p-0 col-form-label-sm col-sm-2 font-weight-bold justify-content-end">User ID: &nbsp;</label>
+                            <input type="text"  id="username" name="username" class="form-control form-control-sm col-sm-5" style="width:80%;display:inline" required />
+                        </div>
+                    </div>
+
+
+                    <div class="form-inline row">
+                        <div class="form-group col-md-6 mb-1">
+                            <label for="password" class="m-0 p-0 col-form-label-sm col-sm-2 font-weight-bold justify-content-end">password: &nbsp;</label>
+                            <input type="password"  id="password" name="password" class="form-control form-control-sm col-sm-5" style="width:80%;display:inline" required />
+                        </div>
+                    </div>
+
+
+
+                    <div class="submitButton mt-2">
+                        <input type="submit" value="Register" class="btn btn-sm btn-primary offset-sm-1">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

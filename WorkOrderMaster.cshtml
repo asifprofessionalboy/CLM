@@ -1,0 +1,201 @@
+﻿@model CLMSAPP.Models.AppWorkOrderMaster
+
+
+
+<div class="container-fluid">
+
+
+    <div class="card m-2 shadow-lg">
+
+
+
+
+
+        <div class="card-header bg-info text-light">
+            <h6 class="m-0">WorkOrderMaster Master</h6>
+        </div>
+
+        <div class="card-body pt-1">
+
+
+
+            <fieldset style="border:1px solid #bfbebe;padding:5px 20px 5px 20px;border-radius:6px">
+                <legend style="width:auto;border:0;font-size:14px;margin:0px 6px 0px 6px;padding:0px 5px 0px 5px;color:#0000FF"><b>Search</b></legend>
+                <div class="form-inline row">
+                    <div class="form-group col-md-3 mb-1">
+                        <label class=" col-form-label-sm  font-weight-bold">WorkOrder : </label>
+                        <input type="text" id="searchWo" class="form-control form-control-sm">
+                    </div>
+
+
+
+
+                    <div class="form-group col-md-3 mb-1">
+                        <label class="col-form-label-sm  font-weight-bold">VCode : </label>
+                        <input type="text" id="searchVCode" class="form-control form-control-sm">
+                    </div>
+
+               
+
+
+                    <div class="form-group col-md-3 mb-1">
+                        <button id="searchBtn" class="btn btn-sm btn-primary">Search</button>
+                        <button id="resetBtn" class="btn btn-sm btn-secondary">Reset</button>
+                    </div>
+                </div>
+            </fieldset>
+
+
+
+
+            <fieldset class="" style="border: 1px solid #bfbebe; padding: 5px 20px 5px 20px; border-radius: 6px; overflow: auto">
+                <legend style="width: auto; border: 0; font-size: 14px; margin: 0px 6px 0px 6px; padding: 0px 5px 0px 5px; color: #0000FF"><b>Records</b></legend>
+                <div class="w-100 border" style="overflow: auto;">
+
+                    <div>
+                        <table cellspacing="0" cellpadding="4" id="recordsTable" style="color:#333333;width:100%;border-collapse:collapse;">
+                            <tbody>
+                                <tr style="color:White;background-color:#5D7B9D;font-size:Smaller;font-weight:bold;">
+
+                                    <th align="left" scope="col">WorkOrder</th>
+                                    <th align="left" scope="col">VCode</th>
+                                    <th align="left" scope="col">VName</th>
+                                    <th align="left" scope="col">From Date</th>
+                                    <th align="left" scope="col">To Date</th>
+                                    <th align="left" scope="col">Status</th>
+
+                                </tr>
+
+                                @foreach (var data in ViewBag.list)
+                                {
+                                    <tr style="color:#333333;background-color:#F7F6F3;font-size:Smaller;">
+                                        <td align="left">@data.WorkOrder</td>
+                                        <td align="left">@data.VendorCode</td>
+                                        <td align="left">@data.VendorName</td>
+                                        <td align="left">@data.StartDate</td>
+                                        <td align="left">@data.EndDate</td>
+                                        <td align="left">@data.WoStatus</td>
+
+
+
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </fieldset>
+
+
+        </div>
+    </div>
+
+
+
+
+            <div class="card m-2 shadow-lg">
+
+        <div class="card-header bg-info text-light">
+            <h6 class="m-0">WorkOrderMaster Master</h6>
+        </div>
+
+
+        <div class="card-body pt-1">
+
+           
+                <form asp-action="WorkOrderMaster">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+
+
+                    <div class="col-3">
+
+                            <div class="form-group">
+                                <label asp-for="WO_NO" class="control-label"></label>
+                                <input asp-for="WO_NO" class="form-control" />
+                                <span asp-validation-for="WO_NO" class="text-danger"></span>
+                            </div>
+
+                    </div>
+
+                    <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="VendorCode" class="control-label"></label>
+                        <input asp-for="VendorCode" class="form-control" />
+                        <span asp-validation-for="VendorCode" class="text-danger"></span>
+                    </div>
+
+
+
+                    </div>
+                        <div class="col-3">
+
+
+                    <div class="form-group">
+                        <label asp-for="VendorName" class="control-label"></label>
+                        <input asp-for="VendorName" class="form-control" />
+                        <span asp-validation-for="VendorName" class="text-danger"></span>
+                    </div>
+
+                    </div>
+
+                    <div class="col-3">
+
+                    <div class="form-group">
+                        <label asp-for="LocationCode" class="control-label"></label>
+                        <input asp-for="LocationCode" class="form-control" />
+                        <span asp-validation-for="LocationCode" class="text-danger"></span>
+                    </div>
+                    </div>
+
+
+                    <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="LocationName" class="control-label"></label>
+                        <input asp-for="LocationName" class="form-control" />
+                        <span asp-validation-for="LocationName" class="text-danger"></span>
+                    </div>
+
+
+                    </div>
+
+                    <div class="col-3">
+
+                    <div class="form-group">
+                        <label asp-for="DeptCode" class="control-label"></label>
+                        <input asp-for="DeptCode" class="form-control" />
+                        <span asp-validation-for="DeptCode" class="text-danger"></span>
+                    </div>
+
+                    </div>
+                    <div class="col-3">
+                    <div class="form-group">
+                        <label asp-for="DeptName" class="control-label"></label>
+                        <input asp-for="DeptName" class="form-control" />
+                        <span asp-validation-for="DeptName" class="text-danger"></span>
+                    </div>
+                    </div>
+                
+
+
+         
+                
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </div>
+
+                    </div>
+                </form>
+      
+    
+          </div>
+          </div>
+
+</div>

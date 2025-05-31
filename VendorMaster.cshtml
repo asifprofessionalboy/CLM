@@ -1,0 +1,341 @@
+﻿@model CLMSAPP.Models.AppVendorMaster
+
+@{
+    ViewData["Title"] = "VendorMaster";
+}
+
+<br />
+
+
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+
+
+
+@*     @if (TempData["insert_msg"] != null)
+    {
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-bottom-right",
+                    timeOut: 10000, // 10 seconds
+                };
+                toastr.success("@Html.Raw(TempData["insert_msg"])");
+            });
+        </script>
+    } *@
+
+
+
+
+
+    @*     @if (TempData["insert_msg"] != null)
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["insert_msg"]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
+     *@
+
+
+ 
+
+
+
+   
+
+
+
+
+
+    <div class="card m-2 shadow-lg">
+
+
+
+
+
+        <div class="card-header bg-info text-light">
+            <h6 class="m-0">Vendor Master</h6>
+        </div>
+
+        <div class="card-body pt-1">
+
+
+
+            <fieldset style="border:1px solid #bfbebe;padding:5px 20px 5px 20px;border-radius:6px">
+                <legend style="width:auto;border:0;font-size:14px;margin:0px 6px 0px 6px;padding:0px 5px 0px 5px;color:#0000FF"><b>Search</b></legend>
+                <div class="form-inline row">
+                    <div class="form-group col-md-3 mb-1">
+                        <label class=" col-form-label-sm  font-weight-bold">VCode : </label>
+                        <input type="text" id="searchVCode" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-3 mb-1">
+                        <label class="col-form-label-sm  font-weight-bold">VName : </label>
+                        <input type="text" id="searchVName" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-3 mb-1">
+                        <button id="searchBtn" class="btn btn-sm btn-primary">Search</button>
+                        <button id="resetBtn" class="btn btn-sm btn-secondary">Reset</button>
+                    </div>
+                </div>
+            </fieldset>
+
+
+
+
+        <fieldset class="" style="border: 1px solid #bfbebe; padding: 5px 20px 5px 20px; border-radius: 6px; overflow: auto">
+            <legend style="width: auto; border: 0; font-size: 14px; margin: 0px 6px 0px 6px; padding: 0px 5px 0px 5px; color: #0000FF"><b>Records</b></legend>
+            <div class="w-100 border" style="overflow: auto;">
+
+                <div>
+                        <table cellspacing="0" cellpadding="4" id="recordsTable" style="color:#333333;width:100%;border-collapse:collapse;">
+                        <tbody>
+                            <tr style="color:White;background-color:#5D7B9D;font-size:Smaller;font-weight:bold;">
+                              
+                                <th align="left" scope="col">VCode</th>
+                                <th align="left" scope="col">VName</th>
+                                <th align="left" scope="col">Email</th>
+                                <th align="left" scope="col">Contact No</th>
+
+                            </tr>
+
+                            @foreach (var vendor in ViewBag.list)
+                            {
+                                <tr style="color:#333333;background-color:#F7F6F3;font-size:Smaller;">
+                                    <td align="left">@vendor.V_CODE</td>
+                                    <td align="left">@vendor.V_NAME</td>
+                                    <td align="left">@vendor.EMAIL</td>
+                                    <td align="left">@vendor.CONTACT_NO</td>
+
+
+
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </fieldset>
+
+
+
+
+      
+            <form asp-action="VendorMaster"  asp-controller="Master" method="post">
+                <fieldset style="border:1px solid #bfbebe;padding:5px 20px 5px 20px;border-radius:6px">
+                    <legend style="width:auto;border:0;font-size:14px;margin:0px 6px 0px 6px;padding:0px 5px 0px 5px;color:#0000FF">
+                        <b>Vendor Master</b>
+                    </legend>
+
+
+                    <div class="row">
+
+                    <div class="col-lg-4 mb-1 form-row">
+                        <div class="col-lg-5">
+                                <label asp-for="V_CODE" class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">Vendor Code :  <span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-lg-7">
+
+
+
+                                <input asp-for="V_CODE" class="aspNetDisabled form-control form-control-sm textboxstyle" />
+
+                                <span asp-validation-for="V_CODE" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label asp-for="V_NAME" class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">Vendor Name :  <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-lg-7">
+
+
+
+                                <input asp-for="V_NAME" class="aspNetDisabled form-control form-control-sm textboxstyle" />
+
+                                <span asp-validation-for="V_NAME" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label asp-for="EMAIL" class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">Vendor Email :  <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-lg-7">
+
+
+
+                                <input asp-for="EMAIL" class="aspNetDisabled form-control form-control-sm textboxstyle" />
+
+                                <span asp-validation-for="EMAIL" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label asp-for="OWNERNAME" class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">Owner Name:  <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-lg-7">
+
+
+
+                                <input asp-for="OWNERNAME" class="aspNetDisabled form-control form-control-sm textboxstyle" />
+
+                                <span asp-validation-for="OWNERNAME" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label asp-for="CONTACT_NO" class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">Contact No:  <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-lg-7">
+
+
+
+                                <input asp-for="CONTACT_NO" class="aspNetDisabled form-control form-control-sm textboxstyle" />
+
+                                <span asp-validation-for="CONTACT_NO" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label asp-for="ADDRESS" class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">Address:  <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-lg-7">
+
+
+
+                                <input asp-for="ADDRESS" class="aspNetDisabled form-control form-control-sm textboxstyle" />
+
+                                <span asp-validation-for="ADDRESS" class="text-danger"></span>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label asp-for="FROM_DATE" class="m-0 mr-2 p-0 col-form-label-sm font-weight-bold fs-6">
+                                    Start Date: <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="FROM_DATE" class="aspNetDisabled form-control form-control-sm textboxstyle" type="date" />
+                                <span asp-validation-for="TO_DATE" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label asp-for="TO_DATE" class="m-0 mr-2 p-0 col-form-label-sm font-weight-bold fs-6">
+                                    End Date: <span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="TO_DATE" class="aspNetDisabled form-control form-control-sm textboxstyle" type="date" />
+                                <span asp-validation-for="TO_DATE" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+        
+
+
+
+
+                    <div class="submitButton mt-2">
+                        <input type="submit" value="Submit" class="btn btn-sm btn-primary offset-sm-1">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+
+    <script>
+
+        // window.onload = function () {
+        //     toastr.success("Vendor Added Successfully!");
+        // };
+
+     
+
+
+
+        $(document).ready(function () {
+            $("#searchBtn").click(function () {
+                var vCode = $("#searchVCode").val().toLowerCase();
+                var vName = $("#searchVName").val().toLowerCase();
+
+                $("#recordsTable tbody tr").filter(function () {
+                    var rowText = $(this).text().toLowerCase();
+                    var vCodeMatch = vCode === "" || $(this).find("td:eq(0)").text().toLowerCase().includes(vCode);
+                    var vNameMatch = vName === "" || $(this).find("td:eq(1)").text().toLowerCase().includes(vName);
+
+                    $(this).toggle(vCodeMatch && vNameMatch);
+                });
+            });
+
+            $("#resetBtn").click(function () {
+                $("#searchVCode, #searchVName").val("");
+                $("#recordsTable tbody tr").show();
+            });
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

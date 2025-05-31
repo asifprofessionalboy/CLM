@@ -1,0 +1,191 @@
+﻿@{
+    @inject IHttpContextAccessor HttpContextAccessor
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CLMSAPP</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
+
+    <link rel="Stylesheet" href="~/Styles/bootstrap.min.css" />
+    <link rel="Stylesheet" href="~/Styles/bootstrap-steps.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/PageStyle.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/menu.css" media="screen" />
+
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
+    <!-- Template Main CSS File -->
+    <link href="~/assets/css/style.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+    <div class="modal modal_outer left_modal fade" id="get_quote_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content ">
+                <div id="sidebar" style="height:100%;overflow-y:auto">
+                    <div class="sidebar-header text-center" style="border-bottom:1px solid white">
+                        <h4 style="display:inline;font-weight:800">CLMS</h4>
+
+                    </div>
+
+                    <ul class="list-unstyled components slide-menu">
+
+
+                                   @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
+                        {
+
+                            <li id="AdminMenu">
+                                <a href="#adminmenu" data-toggle="collapse" class="dropdown-toggle collapsed" aria-expanded="false">Admin</a>
+                                <ul class="list-unstyled collapse" id="adminmenu" style="">
+                                    <li id="UA">
+                                        <a href="Account/UserPermission.aspx">user Authorization</a>
+                                    </li>
+                                    <li id="UM">
+                                        <a href="Account/UserModification.aspx">user Modification</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+                            <li id="MasterMenuMain">
+                                <a href="#mastermenu" data-toggle="collapse" class="dropdown-toggle collapsed" aria-expanded="false">Master</a>
+                                <ul class="list-unstyled collapse" id="mastermenu" style="">
+                                    <li>  <a asp-action="VendorMaster" asp-controller="Master">Vendor Master</a></li>
+
+                                    <li>   <a asp-action="WorkOrderMaster" asp-controller="Master">Work Order Master</a></li>
+
+                                </ul>
+                            </li>
+
+
+                            <li id="VendorMenuMain">
+                                <a href="#vendormenu" data-toggle="collapse" class="dropdown-toggle collapsed" aria-expanded="false">Vendor</a>
+                                <ul class="list-unstyled collapse" id="vendormenu" style="">
+                                    <li>  <a asp-action="VendorProfileEntry" asp-controller="Vendor">Vendor Registration</a></li>
+
+                                    <li>   <a asp-action="WoMaster" asp-controller="Vendor">Work Order Registration</a></li>
+                                    <li>    <a asp-action="EmployeeRegistration" asp-controller="Vendor">Employees Personal Entry</a></li>
+                                </ul>
+                            </li>
+
+
+
+                            <li>
+                                <a asp-action="ChangePassword" asp-controller="User">Change Password</a>
+                            </li>
+                        
+                        }
+
+                        else {
+
+                        <li>
+                            <a asp-action="Index" asp-controller="Home">Home</a>
+                        </li>
+
+                        <li>
+                            <a asp-action="Login" asp-controller="User">Login</a>
+                        </li>
+
+                        <li>
+                            <a asp-action="Register" asp-controller="User">SignUp</a>
+                        </li>
+                        }
+
+
+
+
+                    </ul>
+                </div>
+
+            </div><!-- //modal-content -->
+
+        </div><!-- modal-dialog -->
+    </div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index:0;margin:0">
+        <div class="container-fluid" style="justify-content:initial">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-info" data-toggle="modal" data-target="#get_quote_modal">
+                <i class="fas fa-align-left"></i>
+
+            </button>
+            <a class="navbar-brand h3" href="#" style="margin:0;padding-left:10px">CLMS</a>
+
+
+            <div class="loginDisplay" style="position:absolute; right:1%; color:white; font-size:small;">
+                @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
+                {
+                    <span>Welcome - <b> @HttpContextAccessor.HttpContext.Session.GetString("Username")</b>  </span>
+                    <a asp-action="Logout" asp-controller="User" style="margin-left:30px;color:red">[ Log Out ]</a>
+                }
+                else
+                {
+                    <a id="SignUp" asp-action="Register" asp-controller="User">Sign Up</a>
+
+                    <span id="Label1" style="display:inline-block; width:50px;"></span>
+                    <a asp-action="Login" asp-controller="User" id="HeadLoginView_HeadLoginStatus">Log In</a>
+                }
+            </div>
+
+           
+
+
+
+
+
+
+
+        </div>
+    </nav>
+
+
+   
+
+
+    <div class="container-fluid">
+
+            @RenderBody()
+    
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - CLMSAPP - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+
+    <script src="~/Scripts/jquery-3.5.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/popper-1.16.1.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/solid-5.0.13.js" type="text/javascript"></script>
+    <script src="~/Scripts/fontawesome-5.0.13.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    @await Html.PartialAsync("_ToastrNotifications")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

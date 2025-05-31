@@ -1,0 +1,38 @@
+﻿@{
+    var successMessage = TempData["insert_msg"] as string;
+    var errorMessage = TempData["error_msg"] as string;
+}
+
+@if (!string.IsNullOrEmpty(successMessage) || !string.IsNullOrEmpty(errorMessage))
+{
+    <input type="hidden" id="tempDataSuccessMsg" value="@successMessage" />
+    <input type="hidden" id="tempDataErrorMsg" value="@errorMessage" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successMsg = document.getElementById("tempDataSuccessMsg");
+            var errorMsg = document.getElementById("tempDataErrorMsg");
+
+            if (successMsg && successMsg.value.trim() !== "") {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-bottom-right",
+                    timeOut: 10000
+                };
+                toastr.success(successMsg.value);
+            }
+
+            if (errorMsg && errorMsg.value.trim() !== "") {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-bottom-right",
+                    timeOut: 10000
+                };
+                toastr.error(errorMsg.value);
+            }
+        });
+    </script>
+}

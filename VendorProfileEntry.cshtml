@@ -1,0 +1,242 @@
+﻿@model CLMSAPP.Models.AppVendorReg
+
+@{
+    ViewData["Title"] = "VendorProfileEntry";
+}
+
+
+
+
+@if (ViewData["insert_msg"] != null)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="alert alert-success">
+                @ViewData["insert_msg"];
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+@if (ViewData["error_msg"] != null)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="alert alert-danger">
+                @ViewData["error_msg"];
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+<div class="card m-2 shadow-lg" >
+    <div class="card-header bg-info text-light">
+        <h6 class="m-0">Vendor Registration</h6>
+    </div>
+
+
+
+    <div class="card-body pt-1">
+
+
+        <div class="mt-4 mb-4">
+            <button onclick="OpenForm()" id="OpenForm" class="button">Click to Open Form</button>
+        </div>
+      
+
+        <fieldset class="" style="border:1px solid #bfbebe;padding:5px 20px 5px 20px;border-radius:6px;overflow:auto">
+            <legend style="width:auto;border:0;font-size:14px;margin:0px 6px 0px 6px;padding:0px 5px 0px 5px;color:#0000FF"><b>Records</b></legend>
+            <div class="w-100 border">
+
+                <div>
+                    <table cellspacing="0" cellpadding="4" id="MainContent_vendor_reg_Records" style="color:#333333;width:100%;border-collapse:collapse;">
+                        <thead>
+                            <tr style="color:White;background-color:#5D7B9D;font-size:Smaller;font-weight:bold;">
+                                <th align="left" scope="col">VENDOR CODE</th>
+                                <th align="left" scope="col">VENDOR NAME</th>
+                                <th align="left" scope="col">STATUS</th>
+                                <th align="left" scope="col">REMARKS</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var vendor in ViewBag.list)
+                            {
+                                <tr>
+                                    <td><b> @vendor.V_CODE</b></td>
+                                    <td>@vendor.V_NAME</td>
+
+                                    <td>@vendor.STATUS</td>
+                                    <td>@vendor.REMARKS</td>
+
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </fieldset>
+        <br />
+
+        <div class="" style="display:none" id="FormDiv">
+
+            <fieldset id="vendor_f1" class="" style="border:1px solid #bfbebe;padding:5px 20px 5px 20px;border-radius:6px;overflow:auto">
+                <legend style="width:auto;border:0;font-size:14px;margin:0px 6px 0px 6px;padding:0px 5px 0px 5px;color:#0000FF"><b>Vendor Details</b></legend>
+
+
+
+
+
+
+                <form asp-action="VendorProfileEntry">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">VENDOR CODE :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="V_CODE" value="@ViewBag.user" class="form-control" readonly />
+                                <span asp-validation-for="V_CODE" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">VENDOR NAME :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="V_NAME" value="@ViewBag.prevDetails?.V_NAME" class="form-control" readonly/>
+                                <span asp-validation-for="V_NAME" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">PHONE NO :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="PHONE_NO" value="@ViewBag.prevDetails?.PHONE_NO" readonly class="form-control" />
+                                <span asp-validation-for="PHONE_NO" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">OWNER NAME :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="OWNER_NAME" value="@ViewBag.prevDetails?.OWNER_NAME" readonly class="form-control" />
+                                <span asp-validation-for="OWNER_NAME" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">ADDRESS :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="ADDRESS" value="@ViewBag.prevDetails?.ADDRESS" readonly class="form-control" />
+                                <span asp-validation-for="ADDRESS" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">NATURE OF WORK :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="NATURE_OF_WORK" class="form-control" />
+                                <span asp-validation-for="NATURE_OF_WORK" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">EMAIL :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="EMAIL" class="form-control" />
+                                <span asp-validation-for="EMAIL" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                     
+
+
+                        <div class="col-lg-4 mb-1 form-row">
+                            <div class="col-lg-5">
+                                <label class="m-0 mr-2 p-0 col-form-label-sm  font-weight-bold fs-6">OWNER AADHAR NUMBER :<span class="text-danger"></span></label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input asp-for="OWNER_ADHAR_NUMBER" class="form-control" />
+                                <span asp-validation-for="OWNER_ADHAR_NUMBER" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+
+
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+
+    function OpenForm() 
+    { 
+        document.getElementById("FormDiv").style.display = "block";
+       
+    }
+
+    window.onload = function () {
+        var message = '@(ViewData["insert_msg"] ?? "")';  // Ensure it's not null
+        if (message !== "") {
+            alert(message);
+            // After the alert is acknowledged, redirect to the desired page
+            window.location.href = '@Url.Action("VendorProfileEntry")';
+        }
+    };
+</script>
+
+
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
